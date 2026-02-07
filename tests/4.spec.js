@@ -20,12 +20,12 @@ const getRegistration = async (page, name, password, email, url) => {
   await page.getByRole('button', { name: 'Sign up' }).click();
 };
 
-test.only('Пользователь может зарегистрироваться используя email и пароль', async ({ page }) => {
+test('Пользователь может зарегистрироваться используя email и пароль', async ({ page }) => {
   getRegistration(page, user.name, user.password, user.email, url);
   await expect(page.getByRole('navigation')).toContainText(user.name);
 });
 
-test.only('Пользователь может изменить свое имя в профиле', async ({ page }) => {
+test('Пользователь может изменить свое имя в профиле', async ({ page }) => {
   const jsonCopy = structuredClone(user);
   getRegistration(page, user.name, user.password, user.email, url);
   // сделать тест на изменение имени в профиле
