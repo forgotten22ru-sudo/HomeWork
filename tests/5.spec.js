@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-
+import { MainPage } from '../src/pages/main.page';
 // Переменные
 const user = {
   name: faker.person.fullName(), // 'Allen Brown'
@@ -9,8 +9,13 @@ const user = {
 };
 const url = 'https://realworld.qa.guru/';
 const getRegistration = async (page, name, password, email, url) => {
-  await page.goto(url);
-  await page.getByRole('link', { name: 'Sign up' }).click();
+  const mainPage = new MainPage(page);
+  await mainPage.open(url);
+  await mainPage.gotoRegister();
+
+  //await page.goto(url);
+  //await page.getByRole('link', { name: 'Sign up' }).click();
+
   await page.getByRole('textbox', { name: 'Your Name' }).click();
   await page.getByRole('textbox', { name: 'Your Name' }).fill(name);
   await page.getByRole('textbox', { name: 'Email' }).click();
