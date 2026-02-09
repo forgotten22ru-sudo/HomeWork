@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { MainPage } from '../src/pages/main.page';
+import { RegistrationPage } from '../src/pages/registration.page';
+import { HomePage } from '../src/pages/home.page';
+
 // Переменные
 const user = {
   name: faker.person.fullName(), // 'Allen Brown'
@@ -8,29 +11,24 @@ const user = {
   email: faker.internet.email({ provider: 'example.fakerjs.dev' }), // 'Kassandra4@hotmail.com'
 };
 const url = 'https://realworld.qa.guru/';
-const getRegistration = async (page, name, password, email, url) => {
+
+test.only('Пользователь может зарегистрироваться используя email и пароль Page Object', async ({
+  page,
+}) => {
+  const { name, password, email } = user;
+
   const mainPage = new MainPage(page);
+  const registrationPage = new RegistrationPage(page);
+  const homePage = new HomePage(page);
+
   await mainPage.open(url);
   await mainPage.gotoRegister();
+  await registrationPage.register(password, email, name);
 
-  //await page.goto(url);
-  //await page.getByRole('link', { name: 'Sign up' }).click();
-
-  await page.getByRole('textbox', { name: 'Your Name' }).click();
-  await page.getByRole('textbox', { name: 'Your Name' }).fill(name);
-  await page.getByRole('textbox', { name: 'Email' }).click();
-  await page.getByRole('textbox', { name: 'Email' }).fill(email);
-  await page.getByRole('textbox', { name: 'Password' }).click();
-  await page.getByRole('textbox', { name: 'Password' }).fill(password);
-  await page.getByRole('button', { name: 'Sign up' }).click();
-};
-
-test.only('Пользователь может зарегистрироваться используя email и пароль', async ({ page }) => {
-  getRegistration(page, user.name, user.password, user.email, url);
-  await expect(page.getByRole('navigation')).toContainText(user.name);
+  await expect(homePage.profileName).toContainText(user.name);
 });
 
-test.only('Пользователь может изменить свое имя в профиле', async ({ page }) => {
+test('Пользователь может изменить свое имя в профиле', async ({ page }) => {
   const jsonCopy = structuredClone(user);
   getRegistration(page, user.name, user.password, user.email, url);
   // сделать тест на изменение имени в профиле

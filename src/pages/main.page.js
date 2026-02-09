@@ -2,7 +2,9 @@ export class MainPage {
   // техническое описание страницы
   constructor(page) {
     this.page = page;
-    this.signuplink = page.getByRole('link', { name: 'Sign up' });
+    this.signuplink = page
+      .getByRole('link', { name: 'Sign up' })
+      .describe('Кнопка/ссылка на регистрацию');
   }
   //Бизнесовые действия со страницей
   async gotoRegister() {
