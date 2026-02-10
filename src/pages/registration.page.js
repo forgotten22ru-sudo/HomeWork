@@ -13,7 +13,7 @@ export class RegistrationPage {
       .describe('Кнопка/ссылка на регистрацию');
   }
   //Бизнесовые действия со страницей
-  async register(password, email, name) {
+  async register(name, password, email) {
     await this.passwordInput.click();
     await this.passwordInput.fill(password);
 
@@ -23,6 +23,6 @@ export class RegistrationPage {
     await this.nameInput.click();
     await this.nameInput.fill(name);
 
-    this.signupButton.click();
+    await this.signupButton.click();
   }
 }
