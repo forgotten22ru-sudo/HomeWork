@@ -22,16 +22,25 @@ export class EditArticlePage {
   //Бизнесовые действия со страницей
 
   // Редактирование статьи
-  async updateArticle(title, description, body, tag) {
+  async updateArticleTitle(title) {
     await this.articleTitleInput.click();
     await this.articleTitleInput.fill(title);
 
+    await this.articleUpdateButton.click();
+  }
+  async updateArticleDescription(description) {
     await this.articleDescriptionInput.click();
     await this.articleDescriptionInput.fill(description);
 
+    await this.articleUpdateButton.click();
+  }
+  async updateArticleBody(body) {
     await this.articleBodyInput.click();
     await this.articleBodyInput.fill(body);
 
+    await this.articleUpdateButton.click();
+  }
+  async updateArticleTag(tag) {
     await this.articleTagInput.click();
     await this.articleTagInput.fill(tag);
 

@@ -35,8 +35,8 @@ export class ViewArticlePage {
   }
 
   //Удаление комментария
-  async deleteComment() {
-    await this.deleteCommentButton.click();
+  async deleteArticle() {
+    await this.deleteArticleButton.click();
   }
 
   //Переход в редактирование статьи
