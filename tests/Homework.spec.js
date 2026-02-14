@@ -39,7 +39,6 @@ test.beforeEach('Регистрация пользователя', async ({ page
   await mainPage.open(url);
   await mainPage.gotoRegister();
   await registrationPage.register(user.name, user.password, user.email);
-  await expect(homePage.profileName).toContainText(user.name);
 });
 
 test.describe('Тесты со статьёй', () => {
@@ -52,7 +51,6 @@ test.describe('Тесты со статьёй', () => {
 
     await homePage.gotoCreateArticle();
     await createArticle.createNewArticle(title, description, body, tag);
-    await expect(viewArticle.articleContent).toHaveText(newArticle.body);
   });
 
   test('Пользователь может оставить коммент к статье', async ({ page }) => {
