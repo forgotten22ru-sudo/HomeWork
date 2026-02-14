@@ -29,22 +29,20 @@ export class SettingsPage {
     await this.bioInput.click();
     await this.bioInput.fill(bio);
 
-    this.updateProfileButton.click();
+    await this.updateProfileButton.click();
   }
 
   //Сменить почту
   async changeEmail(email) {
     await this.emailInput.click();
     await this.emailInput.fill(email);
-
-    this.updateProfileButton.click();
+    await this.updateProfileButton.click();
   }
 
   //Сменить пароль
-  async changeEmail(password) {
+  async changePassword(password) {
     await this.passwordInput.click();
     await this.passwordInput.fill(password);
-
-    this.updateProfileButton.click();
+    await this.updateProfileButton.click();
   }
 }
