@@ -34,7 +34,10 @@ export class ViewArticlePage {
     await this.commentButton.click();
   }
 
-  //Удаление Статьи
+  /*Удаление Статьи
+  Для вызова диалогового окна использовал конструкцию 
+   this.page.once('dialog', (dialog) => dialog.accept());
+  */
   async deleteArticle() {
     this.page.once('dialog', (dialog) => dialog.accept());
     await this.deleteArticleButton.click();

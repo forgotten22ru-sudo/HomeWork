@@ -70,9 +70,7 @@ test.describe('Тесты со статьёй', () => {
     await editArticle.updateArticleBody(body);
     await expect(viewArticle.articleContent).toHaveText(body);
   });
-  /*Коммент для преподаваталя: этот тест не выполняется,
- не могу точно сказать, но при проверке вручную я обнаружил, что кнопка удаления не работает
- проверка возвращает, что количество строк с телом статьи = 1 */
+  /*Теперь тест выполняется */
   test('Удаление статьи', async ({ page }) => {
     const viewArticle = new ViewArticlePage(page);
     const body = faker.string.alphanumeric({ length: { min: 50, max: 100 } });
