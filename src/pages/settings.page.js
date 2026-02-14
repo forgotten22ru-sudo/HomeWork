@@ -1,3 +1,4 @@
+import { test } from '@playwright/test';
 export class SettingsPage {
   // техническое описание страницы
   constructor(page) {
@@ -18,31 +19,39 @@ export class SettingsPage {
   //Бизнесовые действия со страницей
   // Сменить имя пользователя
   async changeName(name) {
-    await this.nameInput.click();
-    await this.nameInput.fill(name);
+    return test.step('Смена имени пользователя', async (step) => {
+      await this.nameInput.click();
+      await this.nameInput.fill(name);
 
-    this.updateProfileButton.click();
+      await this.updateProfileButton.click();
+    });
   }
 
   //Сменить био пользователя
   async changeBio(bio) {
-    await this.bioInput.click();
-    await this.bioInput.fill(bio);
+    return test.step('Смена био пользователя', async (step) => {
+      await this.bioInput.click();
+      await this.bioInput.fill(bio);
 
-    await this.updateProfileButton.click();
+      await this.updateProfileButton.click();
+    });
   }
 
   //Сменить почту
   async changeEmail(email) {
-    await this.emailInput.click();
-    await this.emailInput.fill(email);
-    await this.updateProfileButton.click();
+    return test.step('Смена почты пользователя', async (step) => {
+      await this.emailInput.click();
+      await this.emailInput.fill(email);
+      await this.updateProfileButton.click();
+    });
   }
 
   //Сменить пароль
   async changePassword(password) {
-    await this.passwordInput.click();
-    await this.passwordInput.fill(password);
-    await this.updateProfileButton.click();
+    return test.step('Смена пароля пользователя', async (step) => {
+      await this.passwordInput.click();
+      await this.passwordInput.fill(password);
+      await this.updateProfileButton.click();
+    });
   }
 }

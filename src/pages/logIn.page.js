@@ -1,3 +1,4 @@
+import { test } from '@playwright/test';
 export class LogInPage {
   // техническое описание страницы
   constructor(page) {
@@ -8,12 +9,14 @@ export class LogInPage {
   }
 
   async logIn(email, password) {
-    await this.emailInput.click();
-    await this.emailInput.fill(email);
+    return test.step('Вход под существубщим пользователем', async (step) => {
+      await this.emailInput.click();
+      await this.emailInput.fill(email);
 
-    await this.passwordInput.click();
-    await this.passwordInput.fill(password);
+      await this.passwordInput.click();
+      await this.passwordInput.fill(password);
 
-    await this.logInButton.click();
+      await this.logInButton.click();
+    });
   }
 }
