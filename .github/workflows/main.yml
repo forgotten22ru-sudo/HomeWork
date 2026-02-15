@@ -1,0 +1,29 @@
+name: playwright diploma
+#Когда запускаем
+on: 
+  push:
+    branches:
+      - DIploma
+#Руной запуск      
+  workflow_dispatch: 
+
+jobs:
+  pw5Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.2.0
+
+      - name: Установка npm.package.json
+        run: npm ci
+
+      - name: Установка браузеров
+        run: npx playwright install --with-deps
+
+      - name: Запуск тестов
+        run: npm t
+
+  
