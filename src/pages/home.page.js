@@ -1,4 +1,4 @@
-import { RegistrationPage } from './registration.page';
+import { test } from '@playwright/test';
 export class HomePage {
   // техническое описание страницы
   constructor(page) {
@@ -22,17 +22,23 @@ export class HomePage {
 
   //Перейти в настройки
   async gotoSettings() {
-    await this.profileName.click();
-    await this.settingsLink.click();
+    return test.step('Переход в настройки пользователя', async (step) => {
+      await this.profileName.click();
+      await this.settingsLink.click();
+    });
   }
 
   //Выйти из профиля
   async logOut() {
-    await this.profileName.click();
-    await this.logOutLink.click();
+    return test.step('Выход из профиля', async (step) => {
+      await this.profileName.click();
+      await this.logOutLink.click();
+    });
   }
   //Перейти в создание статьи
   async gotoCreateArticle() {
-    this.createArticleLink.click();
+    return test.step('Перейти на страницу создания статьи', async (step) => {
+      this.createArticleLink.click();
+    });
   }
 }

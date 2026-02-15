@@ -1,3 +1,4 @@
+import { test } from '@playwright/test';
 export class ViewArticlePage {
   // техническое описание страницы
   constructor(page) {
@@ -28,19 +29,28 @@ export class ViewArticlePage {
 
   //Создание коммента
   async createNewComment(commText) {
-    await this.commentInput.click();
-    await this.commentInput.fill(commText);
-
-    await this.commentButton.click();
+    return test.step('Создание комментария', async (step) => {
+      await this.commentInput.click();
+      await this.commentInput.fill(commText);
+      await this.commentButton.click();
+    });
   }
 
-  //Удаление комментария
+  /*Удаление Статьи
+  Для вызова диалогового окна использовал конструкцию 
+   this.page.once('dialog', (dialog) => dialog.accept());
+  */
   async deleteArticle() {
-    await this.deleteArticleButton.click();
+    return test.step('Удаление статьи', async (step) => {
+      this.page.once('dialog', (dialog) => dialog.accept());
+      await this.deleteArticleButton.click();
+    });
   }
 
   //Переход в редактирование статьи
   async goToeditArticle() {
-    await this.editArticleButton.click();
+    return test.step('Переход в редактирование статьи', async (step) => {
+      await this.editArticleButton.click();
+    });
   }
 }

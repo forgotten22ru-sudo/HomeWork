@@ -1,3 +1,4 @@
+import { test } from '@playwright/test';
 export class RegistrationPage {
   // техническое описание страницы
   constructor(page) {
@@ -14,15 +15,17 @@ export class RegistrationPage {
   }
   //Бизнесовые действия со страницей
   async register(name, password, email) {
-    await this.passwordInput.click();
-    await this.passwordInput.fill(password);
+    return test.step('Записываем данные для регистрации нового пользователя', async (step) => {
+      await this.passwordInput.click();
+      await this.passwordInput.fill(password);
 
-    await this.emailInput.click();
-    await this.emailInput.fill(email);
+      await this.emailInput.click();
+      await this.emailInput.fill(email);
 
-    await this.nameInput.click();
-    await this.nameInput.fill(name);
+      await this.nameInput.click();
+      await this.nameInput.fill(name);
 
-    await this.signupButton.click();
+      await this.signupButton.click();
+    });
   }
 }

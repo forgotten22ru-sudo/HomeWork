@@ -1,3 +1,4 @@
+import { test } from '@playwright/test';
 export class MainPage {
   // техническое описание страницы
   constructor(page) {
@@ -9,14 +10,20 @@ export class MainPage {
   }
   //Бизнесовые действия со страницей
   async gotoRegister() {
-    await this.signuplink.click();
+    return test.step('Перейти на страницу регистрации', async (step) => {
+      await this.signuplink.click();
+    });
   }
 
   async open(url) {
-    await this.page.goto(url);
+    return test.step(`ОТкрыть главную страницу ${url} `, async (step) => {
+      await this.page.goto(url);
+    });
   }
 
   async goToLogIn() {
-    await this.logInLink.click();
+    return test.step('Перейти на страницу входа в профиль', async (step) => {
+      await this.logInLink.click();
+    });
   }
 }

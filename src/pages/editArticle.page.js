@@ -1,3 +1,4 @@
+import { test } from '@playwright/test';
 export class EditArticlePage {
   // техническое описание страницы
   constructor(page) {
@@ -23,27 +24,35 @@ export class EditArticlePage {
 
   // Редактирование статьи
   async updateArticleTitle(title) {
-    await this.articleTitleInput.click();
-    await this.articleTitleInput.fill(title);
+    return test.step('Редактирование статьи', async (step) => {
+      await this.articleTitleInput.click();
+      await this.articleTitleInput.fill(title);
 
-    await this.articleUpdateButton.click();
+      await this.articleUpdateButton.click();
+    });
   }
   async updateArticleDescription(description) {
+    return test.step('Редактирование описания статьи', async (step) => {
     await this.articleDescriptionInput.click();
     await this.articleDescriptionInput.fill(description);
 
     await this.articleUpdateButton.click();
+    });
   }
   async updateArticleBody(body) {
+    return test.step('Редактирование тела статьи', async (step) => {
     await this.articleBodyInput.click();
     await this.articleBodyInput.fill(body);
 
     await this.articleUpdateButton.click();
+    });
   }
   async updateArticleTag(tag) {
+    return test.step('Редактирование тэга статьи', async (step) => {
     await this.articleTagInput.click();
     await this.articleTagInput.fill(tag);
 
     await this.articleUpdateButton.click();
+    });
   }
 }

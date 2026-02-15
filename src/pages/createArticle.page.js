@@ -1,3 +1,4 @@
+import { test } from '@playwright/test';
 export class CreateArticlePage {
   // техническое описание страницы
   constructor(page) {
@@ -22,18 +23,20 @@ export class CreateArticlePage {
 
   // Создание статьи
   async createNewArticle(title, description, body, tag) {
-    await this.articleTitleInput.click();
-    await this.articleTitleInput.fill(title);
+    return test.step('Создание новой статьи', async (step) => {
+      await this.articleTitleInput.click();
+      await this.articleTitleInput.fill(title);
 
-    await this.articleDescriptionInput.click();
-    await this.articleDescriptionInput.fill(description);
+      await this.articleDescriptionInput.click();
+      await this.articleDescriptionInput.fill(description);
 
-    await this.articleBodyInput.click();
-    await this.articleBodyInput.fill(body);
+      await this.articleBodyInput.click();
+      await this.articleBodyInput.fill(body);
 
-    await this.articleTagInput.click();
-    await this.articleTagInput.fill(tag);
+      await this.articleTagInput.click();
+      await this.articleTagInput.fill(tag);
 
-    await this.articlePublishButton.click();
+      await this.articlePublishButton.click();
+    });
   }
 }
