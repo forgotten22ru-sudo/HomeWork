@@ -3,7 +3,7 @@ name: playwright diploma
 on: 
   push:
     branches:
-      - DIploma
+      - main
 #Руной запуск      
   workflow_dispatch: 
 
