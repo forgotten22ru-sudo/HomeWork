@@ -6,10 +6,11 @@ export class LogInPage {
     this.logInButton = page.getByRole('button', { name: 'Login' });
     this.emailInput = page.getByRole('textbox', { name: 'Email' }).describe('Поле почты');
     this.passwordInput = page.getByRole('textbox', { name: 'Password' }).describe('Поле пароль');
+    this.wrongParametresMessage = page.locator('.error-messages li');
   }
 
   async logIn(email, password) {
-    return test.step('Вход под существубщим пользователем', async (step) => {
+    return test.step('Вход под существующим пользователем', async (step) => {
       await this.emailInput.click();
       await this.emailInput.fill(email);
 
