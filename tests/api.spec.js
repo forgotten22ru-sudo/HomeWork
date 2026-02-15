@@ -10,7 +10,7 @@ test.describe('работа с апи', () => {
     expect(token).toBeTruthy();
     const { body, header } = await api.challenges.get(token);
     //console.log(request);
-    console.log(body, header);
+    //console.log(body, header);
     expect(body.challenges.length).toBe(59);
     const todos = await api.todos.get(token);
     // console.log(todos);
