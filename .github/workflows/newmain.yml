@@ -38,7 +38,7 @@ jobs:
           ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
           ALLURE_LAUNCH_NAME: "Playwright Diploma #${{ github.run_number }}"        
-        run: allurectl watch -- npx playwright test
+        run: allurectl upload ./allure-results
                  
         
       - name: Сгенерировать Allure отчет в файл
