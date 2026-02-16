@@ -55,4 +55,39 @@ jobs:
           name: allure single file
           path: allure-report/index.html
 
+      - name: Сформировать конфиг для отправки в телеграм
+        run: |
+          mkdir -p notifications
+          cat <<EOF > notifications/config.json
+          {
+            "base": {
+              "logo": "",
+              "project": "diplom",
+              "environment": "some env",
+              "comment": "",
+              "reportLink": "",
+              "language": "en",
+              "allureFolder": "allure-report",
+              "enableChart": true,
+              "enableSuitesPublishing": false,
+              "customData": {}
+            },
+            "telegram": {
+              "token": "${{ secrets.TELEGRAM_TOKEN }}",
+              "chat": "${{ secrets.TELEGRAM_CHAT }}",
+              "replyTo": ""
+            }
+          }
+          EOF
+
+      - name: Подготовить уведомление в телеграм
+        run: npm run reportallure
+
+      - name: Подготовить уведомление в телеграм
+        run: |
+          java -DconfigFile=notifications/config.json -jar notifications/allure-notifications-4.11.0.jar
+        
+          
+      
+
   
