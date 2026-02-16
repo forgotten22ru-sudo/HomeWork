@@ -45,7 +45,7 @@ jobs:
           ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
         run: |
-          ./allurectl upload allure-results
+          allurectl upload allure-results
 
         
         
