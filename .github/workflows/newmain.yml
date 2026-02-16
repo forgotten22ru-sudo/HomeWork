@@ -1,11 +1,16 @@
 name: playwright diploma with TestOps
 #Когда запускаем
 on: 
-  #push:
-    #branches:
-      #- main
-#Руной запуск      
+  push:
+    branches:
+      - main
+#Ручной запуск      
   workflow_dispatch: 
+  
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   pw5Tests:
