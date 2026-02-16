@@ -30,14 +30,7 @@ jobs:
           allure-token: ${{ secrets.ALLURE_TOKEN }}         
           allure-project-id: ${{ secrets.ALLURE_PROJECT_ID }}
 
-      - name: Запуск тестов
-        run: npm t
-        continue-on-error: true
-
-      - name: Debug allure-results
-        run: |
-          ls -la
-          ls -la allure-results || echo "allure-results NOT FOUND"
+           
 
       - name: Upload results to TestOps
         env:
@@ -46,7 +39,7 @@ jobs:
           ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
           ALLURE_LAUNCH_NAME: "Playwright Diploma #${{ github.run_number }}"
         run: |
-          allurectl upload allure-results \
+          run: allurectl watch -- npx playwright test
                  
         
       - name: Сгенерировать Allure отчет в файл
