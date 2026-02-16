@@ -1,9 +1,9 @@
 name: playwright diploma
 #Когда запускаем
 on: 
-  push:
-    branches:
-      - main
+  #push:
+    #branches:
+      #- main
 #Руной запуск      
   workflow_dispatch: 
 
