@@ -23,10 +23,12 @@ jobs:
       - name: Установка браузеров
         run: npx playwright install --with-deps
 
-      - name: Download allurectl
-        run: |
-          curl -o allurectl https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64
-          chmod +x allurectl
+      - name: Setup Allure TestOps
+        uses: allure-framework/setup-allurectl@v1.0.2
+        with:
+          allure-endpoint: ${{ secrets.ALLURE_ENDPOINT }}
+          allure-token: ${{ secrets.ALLURE_TOKEN }}         
+          allure-project-id: ${{ secrets.ALLURE_PROJECT_ID }}
 
       - name: Запуск тестов
         run: npm t
