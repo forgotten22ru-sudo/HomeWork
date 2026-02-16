@@ -10,12 +10,12 @@
     "ui": "npx playwright test --ui",
     "allure": "npx allure serve allure-results",
     "allurefile": "npx allure awesome ./allure-results --single-file",
-    "report": "npx allure generate && node scripts/allure2-widgets-summary.js"
+    "reportallure": "npx allure generate && node scripts/allure2-widgets-summary.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "modules",
+  "type": "module",
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
     "@playwright/test": "^1.58.2",
