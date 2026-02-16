@@ -45,7 +45,10 @@ jobs:
           ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
         run: |
-          allurectl upload allure-results
+          allurectl upload allure-results \
+      --name "Playwright Diploma #${GITHUB_RUN_NUMBER}" \
+      --tags "github,workflow" \
+      --build "${GITHUB_SHA}"
 
         
         
