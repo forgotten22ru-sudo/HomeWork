@@ -1,0 +1,53 @@
+name: playwright diploma with TestOps
+#Когда запускаем
+on: 
+  #push:
+    #branches:
+      #- main
+#Руной запуск      
+  workflow_dispatch: 
+
+jobs:
+  pw5Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.2.0
+
+      - name: Установка npm.package.json
+        run: npm ci
+
+      - name: Установка браузеров
+        run: npx playwright install --with-deps
+
+      - name: Download allurectl
+        run: |
+          curl -o allurectl https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64
+          chmod +x allurectl
+
+      - name: Запуск тестов и загрузка в TestOps
+        env:
+          ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
+          ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
+          ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
+        run: |
+          ./allurectl watch -- npm t      
+        
+        
+      - name: Сгенерировать Allure отчет в файл
+        run: npm run allurefile
+        continue-on-error: true
+        if: always()
+        
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v6.0.0
+        continue-on-error: true
+        if: always()
+        with:
+          name: allure single file
+          path: allure-report/index.html
+
+  
