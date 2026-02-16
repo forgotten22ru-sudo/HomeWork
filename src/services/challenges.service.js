@@ -11,9 +11,7 @@ export class ChallengesService {
           'X-CHALLENGER': token,
         },
       });
-      const body = await resp.json();
-      const header = await resp.json();
-      return { body, header };
+      return await resp;
     });
   }
 }
