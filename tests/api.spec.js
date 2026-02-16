@@ -5,9 +5,16 @@ import { TodoBuilder } from '../src/helpers/builders/todo.builder';
 //let token;
 //const url = 'https://apichallenges.eviltester.com/';
 test.describe('работа с апи', () => {
+  //Делаю так, чтобы на одного worker создавался один токен
+  let token;
+  test.beforeAll(async ({ request }) => {
+    const api = new Api(request);
+    token = await api.challenger.post();
+    console.log(token);
+  });
+
   test('Получить один существующий todo', async ({ request }) => {
     const api = new Api(request);
-    const token = await api.challenger.post();
     let resp = await api.todos.get(token);
     let todos = await resp.json(); // Преобразую ответ в JSON
     const listTodos = todos.todos;
@@ -29,7 +36,6 @@ test.describe('работа с апи', () => {
   test('Добавить новый todo', async ({ request }) => {
     const api = new Api(request);
     const todo = new TodoBuilder().withTitle().withDone().withDescription().build();
-    const token = await api.challenger.post();
     let resp = await api.todos.post(token, todo);
     const body = await resp.json();
     expect(resp.status()).toBe(201);
@@ -45,7 +51,6 @@ test.describe('работа с апи', () => {
   test('Изменить описание todo', async ({ request }) => {
     const api = new Api(request);
     const newtodo = new TodoBuilder().withDescription().build();
-    const token = await api.challenger.post();
     const todolist = await api.todos.get(token); //Получаю список todos
     const listBody = await todolist.json(); //Получаю список todos в JSON
     const todos = listBody.todos;
@@ -67,7 +72,6 @@ test.describe('работа с апи', () => {
 
   test('Получить список challenges', async ({ request }) => {
     const api = new Api(request);
-    const token = await api.challenger.post();
     const resp = await api.challenges.get(token);
     const challenges = await resp.json(); // Преобразую ответ в JSON
     expect(resp.status()).toBe(200);
@@ -82,12 +86,9 @@ test.describe('работа с апи', () => {
     });
   });
 
-  test.only('Удалить todo', async ({ request }) => {
+  test('Удалить todo', async ({ request }) => {
     const api = new Api(request);
     const todo = new TodoBuilder().withTitle().withDone().withDescription().build();
-    //const token = await api.challenger.post();
-    //console.log(token);
-    const token = '66b3d9c3-6044-44fb-a205-be09f99c27c6';
     let resp = await api.todos.post(token, todo);
     const body = await resp.json();
     const id = body.id;

@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../src/helpers/fixtures/fixture';
 import { UserBuilder, ArticleBuilder } from '../src/helpers/builders/index';
 
-test.describe('Работа с статьями', () => {
+test.describe('Работа со статьями', () => {
   test('Пользователь может оставить коммент к статье', async ({ newArticle }) => {
     const { app } = newArticle;
     const comment = new ArticleBuilder().withComment().build();
