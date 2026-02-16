@@ -46,14 +46,18 @@ jobs:
         run: npm run allurefile
         continue-on-error: true
         if: always()
-        
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v6.0.0
-        continue-on-error: true
-        if: always()
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Allure Report Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: allure single file
-          path: allure-report/index.html
+          path: 'allure-report'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4     
 
       - name: Сформировать конфиг для отправки в телеграм
         run: |
@@ -65,8 +69,8 @@ jobs:
               "project": "diplom",
               "environment": "some env",
               "comment": "",
-              "reportLink": "",
-              "language": "en",
+              "reportLink": "${{ steps.deployment.outputs.page_url }}/index.html",
+              "language": "ru",
               "allureFolder": "allure-report",
               "enableChart": true,
               "enableSuitesPublishing": false,
