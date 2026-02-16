@@ -95,14 +95,7 @@ jobs:
       - name: Подготовить уведомление в телеграм
         run: |
           java -DconfigFile=notifications/config.json -jar notifications/allure-notifications-4.11.0.jar
-
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v6.0.0
-        continue-on-error: true
-        if: always()
-        with:
-          name: allure single file
-          path: allure-report/index.html
+      
         
           
       
