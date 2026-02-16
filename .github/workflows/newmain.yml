@@ -28,13 +28,23 @@ jobs:
           curl -o allurectl https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64
           chmod +x allurectl
 
-      - name: Запуск тестов и загрузка в TestOps
+      - name: Запуск тестов
+        run: npm t
+        continue-on-error: true
+
+      - name: Debug allure-results
+        run: |
+          ls -la
+          ls -la allure-results || echo "allure-results NOT FOUND"
+
+      - name: Upload results to TestOps
         env:
           ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
           ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
         run: |
-          ./allurectl watch -- npm t      
+          ./allurectl upload allure-results
+
         
         
       - name: Сгенерировать Allure отчет в файл
