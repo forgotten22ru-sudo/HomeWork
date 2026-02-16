@@ -27,7 +27,7 @@ jobs:
         run: npm t      
         
       - name: Сгенерировать Allure отчет в файл
-        run: npx allure awesome ./allure-results --single-file
+        run: npm run allurefile
         continue-on-error: true
         if: always()
         
