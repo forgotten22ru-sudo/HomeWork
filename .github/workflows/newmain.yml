@@ -44,13 +44,10 @@ jobs:
           ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
           ALLURE_ENDPOINT: ${{ secrets.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
+          ALLURE_LAUNCH_NAME: "Playwright Diploma #${{ github.run_number }}"
         run: |
           allurectl upload allure-results \
-            --name "Playwright Diploma #${GITHUB_RUN_NUMBER}" \
-            --tags "github,workflow" \
-            --build "${GITHUB_SHA}"
-
-        
+                 
         
       - name: Сгенерировать Allure отчет в файл
         run: npm run allurefile
