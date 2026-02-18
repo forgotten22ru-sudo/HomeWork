@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 export class TodosService {
   constructor(request) {
     this.request = request;
-    this.url = 'https://apichallenges.eviltester.com/';
+    this.url = process.env.API_URL;
   }
   async get(token, id) {
     const endpoint = id ? `todos/${id}` : 'todos';
