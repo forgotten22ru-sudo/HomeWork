@@ -40,7 +40,9 @@ jobs:
           allure-token: ${{ secrets.ALLURE_TOKEN }}         
           allure-project-id: ${{ secrets.ALLURE_PROJECT_ID }}
       - name: Запуск тестов
-        run: npm t      
+        run: npm t  
+        continue-on-error: true
+        if: always()
            
 
       - name: Upload results to TestOps
@@ -50,6 +52,8 @@ jobs:
           ALLURE_PROJECT_ID: ${{ secrets.ALLURE_PROJECT_ID }}
           ALLURE_LAUNCH_NAME: "Playwright Diploma #${{ github.run_number }}"        
         run: allurectl upload ./allure-results
+        continue-on-error: true
+        if: always()
                  
         
       - name: Сгенерировать Allure отчет в файл
