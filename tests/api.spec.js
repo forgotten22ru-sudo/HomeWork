@@ -1,20 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { Api } from '../src/services/api.services';
+import { expect } from '@playwright/test';
+import { test } from '../src/helpers/fixtures/fixture';
 import { TodoBuilder } from '../src/helpers/builders/todo.builder';
 
-//let token;
-//const url = 'https://apichallenges.eviltester.com/';
-test.describe('работа с апи', () => {
-  //Делаю так, чтобы на одного worker создавался один токен
-  let token;
-  test.beforeAll(async ({ request }) => {
-    const api = new Api(request);
-    token = await api.challenger.post();
-    console.log(token);
-  });
-
-  test('Получить один существующий todo', async ({ request }) => {
-    const api = new Api(request);
+test.describe.only('работа с апи', () => {
+  test('Получить один существующий todo', async ({ getToken }) => {
+    const { api, token } = getToken;
     let resp = await api.todos.get(token);
     let todos = await resp.json(); // Преобразую ответ в JSON
     const listTodos = todos.todos;
@@ -33,8 +23,8 @@ test.describe('работа с апи', () => {
     });
   });
 
-  test('Добавить новый todo', async ({ request }) => {
-    const api = new Api(request);
+  test('Добавить новый todo', async ({ getToken }) => {
+    const { api, token } = getToken;
     const todo = new TodoBuilder().withTitle().withDone().withDescription().build();
     let resp = await api.todos.post(token, todo);
     const body = await resp.json();
@@ -48,8 +38,8 @@ test.describe('работа с апи', () => {
     });
   });
 
-  test('Изменить описание todo', async ({ request }) => {
-    const api = new Api(request);
+  test('Изменить описание todo', async ({ getToken }) => {
+    const { api, token } = getToken;
     const newtodo = new TodoBuilder().withDescription().build();
     const todolist = await api.todos.get(token); //Получаю список todos
     const listBody = await todolist.json(); //Получаю список todos в JSON
@@ -70,8 +60,8 @@ test.describe('работа с апи', () => {
     });
   });
 
-  test('Получить список challenges', async ({ request }) => {
-    const api = new Api(request);
+  test('Получить список challenges', async ({ getToken }) => {
+    const { api, token } = getToken;
     const resp = await api.challenges.get(token);
     const challenges = await resp.json(); // Преобразую ответ в JSON
     expect(resp.status()).toBe(200);
@@ -86,8 +76,8 @@ test.describe('работа с апи', () => {
     });
   });
 
-  test('Удалить todo', async ({ request }) => {
-    const api = new Api(request);
+  test('Удалить todo', async ({ getToken }) => {
+    const { api, token } = getToken;
     const todo = new TodoBuilder().withTitle().withDone().withDescription().build();
     let resp = await api.todos.post(token, todo);
     const body = await resp.json();

@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-export class TodosServise {
+export class TodosService {
   constructor(request) {
     this.request = request;
     this.url = 'https://apichallenges.eviltester.com/';
