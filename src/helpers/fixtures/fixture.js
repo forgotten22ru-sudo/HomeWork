@@ -49,10 +49,7 @@ export const test = base.extend({
 
   //Создаем api
   api: async ({ request }, use) => {
-    const apiContext = await request.newContext({
-      baseURL: process.env.API_URL,
-    });
-    const api = new Api(apiContext);
+    const api = new Api(request);
     await use(api);
   },
 

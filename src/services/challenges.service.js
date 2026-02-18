@@ -5,7 +5,7 @@ export class ChallengesService {
   }
   async get(token) {
     return test.step('GET /challenges', async (step) => {
-      const resp = await this.request.get(`/challenges`, {
+      const resp = await this.request.get(`${process.env.API_URL}/challenges`, {
         headers: {
           'X-CHALLENGER': token,
         },
