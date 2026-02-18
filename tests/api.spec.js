@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../src/helpers/fixtures/fixture';
 import { TodoBuilder } from '../src/helpers/builders/todo.builder';
 
-test.describe.only('работа с апи', () => {
+test.describe('работа с апи', () => {
   test('Получить один существующий todo', async ({ getToken }) => {
     const { api, token } = getToken;
     let resp = await api.todos.get(token);
