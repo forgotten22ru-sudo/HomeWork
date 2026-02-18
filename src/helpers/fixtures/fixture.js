@@ -1,5 +1,6 @@
 import { test as base } from '@playwright/test';
 import { App } from '../../pages/app.page';
+import { Api } from '../../services/api.services';
 import { UserBuilder, ArticleBuilder } from '../builders/index';
 
 export const test = base.extend({
@@ -44,5 +45,17 @@ export const test = base.extend({
       );
     });
     await use({ app, article });
+  },
+
+  //Создаем api
+  api: async ({ request }, use) => {
+    const api = new Api(request);
+    await use(api);
+  },
+
+  //Получаем токен
+  getToken: async ({ api }, use) => {
+    const token = await api.challenger.post();
+    await use({ api, token });
   },
 });
