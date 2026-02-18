@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 export class ChallengerService {
   constructor(request) {
     this.request = request;
-    this.url = 'https://apichallenges.eviltester.com/';
+    this.url = process.env.API_URL;
   }
   async post() {
     return test.step('POST /challenger', async (step) => {

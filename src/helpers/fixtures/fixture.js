@@ -23,7 +23,7 @@ export const test = base.extend({
     const { user } = registredUser;
 
     await test.step('Вход под созданным пользователем', async () => {
-      await app.main.open('https://realworld.qa.guru/');
+      await app.main.open('/');
       await app.main.gotoRegister();
       await app.registration.register(user.name, user.password, user.email);
     });
