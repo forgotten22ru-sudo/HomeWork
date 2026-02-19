@@ -6,7 +6,7 @@ export class LogInPage {
     this.logInButton = page.getByRole('button', { name: 'Login' });
     this.emailInput = page.getByRole('textbox', { name: 'Email' }).describe('Поле почты');
     this.passwordInput = page.getByRole('textbox', { name: 'Password' }).describe('Поле пароль');
-    this.wrongParametresMessage = page.locator('.error-messages li');
+    this.wrongParametersMessage = page.locator('.error-messages li');
   }
 
   async logIn(email, password) {

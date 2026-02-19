@@ -9,8 +9,8 @@ export class UserBuilder {
     this.name = name ?? faker.person.fullName(); // Генерация Имени
     return this;
   }
-  withPassword(lenght = 7) {
-    this.password = faker.internet.password({ length: lenght }); // Генерим пароль
+  withPassword(length = 7) {
+    this.password = faker.internet.password({ length: length }); // Генерим пароль
     return this;
   }
   build() {

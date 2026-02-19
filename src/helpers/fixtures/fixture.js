@@ -12,21 +12,19 @@ export const test = base.extend({
   },
 
   //Создаем пользователя
-  registredUser: async ({ page }, use) => {
+  registeredUser: async ({ page }, use) => {
     const user = new UserBuilder().withEmail().withName().withPassword().build();
 
     await use({ page, user });
   },
 
   //Регистрируем пользователя
-  profilePage: async ({ app, registredUser }, use) => {
-    const { user } = registredUser;
+  profilePage: async ({ app, registeredUser }, use) => {
+    const { user } = registeredUser;
 
-    await test.step('Вход под созданным пользователем', async () => {
-      await app.main.open('/');
-      await app.main.gotoRegister();
-      await app.registration.register(user.name, user.password, user.email);
-    });
+    await app.main.open('/');
+    await app.main.gotoRegister();
+    await app.registration.register(user.name, user.password, user.email);
 
     await use({ app, user });
   },
@@ -35,21 +33,25 @@ export const test = base.extend({
   newArticle: async ({ profilePage }, use) => {
     const article = new ArticleBuilder().withTitle().withDescription().withBody().withTag().build();
     const { app } = profilePage;
-    await test.step('Создаем статью с новым зареганным пользователем', async () => {
-      await app.home.gotoCreateArticle();
-      await app.createArticle.createNewArticle(
-        article.title,
-        article.description,
-        article.body,
-        article.tag,
-      );
-    });
+    await app.home.gotoCreateArticle();
+    await app.createArticle.createNewArticle(
+      article.title,
+      article.description,
+      article.body,
+      article.tag,
+    );
+
     await use({ app, article });
   },
 
+  apiURL: async ({}, use, testInfo) => {
+    //Создал фикстуру для apiURL
+    await use(testInfo.project.use.apiURL);
+  },
+
   //Создаем api
-  api: async ({ request }, use) => {
-    const api = new Api(request);
+  api: async ({ request, apiURL }, use) => {
+    const api = new Api(request, apiURL);
     await use(api);
   },
 
