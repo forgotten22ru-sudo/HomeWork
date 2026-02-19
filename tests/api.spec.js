@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from '../src/helpers/fixtures/fixture';
-import { TodoBuilder } from '../src/helpers/builders/todo.builder';
+import { TodoBuilder } from '../src/helpers/builders/index';
 
 test.describe('работа с апи', () => {
   test('Получить один существующий todo', async ({ getToken }) => {

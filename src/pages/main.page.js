@@ -16,7 +16,7 @@ export class MainPage {
   }
 
   async open(url) {
-    return test.step(`ОТкрыть главную страницу ${url} `, async (step) => {
+    return test.step(`Открыть главную страницу ${url} `, async (step) => {
       await this.page.goto(url);
     });
   }

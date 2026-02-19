@@ -48,7 +48,7 @@ export class ViewArticlePage {
   }
 
   //Переход в редактирование статьи
-  async goToeditArticle() {
+  async goToEditArticle() {
     return test.step('Переход в редактирование статьи', async (step) => {
       await this.editArticleButton.click();
     });

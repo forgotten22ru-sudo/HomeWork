@@ -38,7 +38,7 @@ export class HomePage {
   //Перейти в создание статьи
   async gotoCreateArticle() {
     return test.step('Перейти на страницу создания статьи', async (step) => {
-      this.createArticleLink.click();
+      await this.createArticleLink.click();
     });
   }
 }

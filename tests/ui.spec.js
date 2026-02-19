@@ -16,7 +16,7 @@ test.describe('Работа со статьями', () => {
     const { app } = newArticle;
     const newBody = new ArticleBuilder().withBody().build();
 
-    await app.viewArticle.goToeditArticle();
+    await app.viewArticle.goToEditArticle();
     await app.editArticle.updateArticleBody(newBody.body);
 
     await expect(app.viewArticle.articleContent).toHaveText(newBody.body);
@@ -77,6 +77,6 @@ test.describe('Работа с профилем', () => {
     await app.main.goToLogIn();
     await app.logIn.logIn(user.email, newpassword.password);
 
-    await expect(app.logIn.wrongParametresMessage).toBeVisible();
+    await expect(app.logIn.wrongParametersMessage).toBeVisible();
   });
 });
